@@ -46,9 +46,11 @@ class ViewController: UIViewController {
         let actualAnswer = actualQuestion.answer
         
         if userAnswer == actualAnswer {
-            print("Right")
+//            print("Right")
+            sender.backgroundColor = UIColor.green
         } else {
-            print("Wrong")
+//            print("Wrong")
+            sender.backgroundColor = UIColor.red
         }
         
         if questionNum + 1 < quiz.count {
@@ -56,12 +58,16 @@ class ViewController: UIViewController {
         } else {
             questionNum = 0
         }
-        updateUI()
+        
+         Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(updateUI), userInfo: nil, repeats: false)
         
     }
     
-    func updateUI(){
+    @objc func updateUI(){
         questionLabel.text = quiz[questionNum].text
+        trueBtn.backgroundColor = UIColor.clear
+        falseBtn.backgroundColor = UIColor.clear
+        progressBar.progress = Float(questionNum + 1)/Float(quiz.count)
     }
     
 }
