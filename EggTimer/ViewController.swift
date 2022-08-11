@@ -15,13 +15,20 @@ class ViewController: UIViewController {
     let hardTime = 12
     var secondRemaining = 60
     let eggTimes = ["Soft":300, "Medium":420, "Hard":720]
+    
+    ///Create new timer
+    var timer = Timer()
 
     @IBAction func hardnessSelected(_ sender: UIButton) {
+        
+        ///Stop the previous timer
+        timer.invalidate()
+        
         let hardness = sender.currentTitle!
         secondRemaining = eggTimes[hardness]!
 
         ///Argument "#selector"  refers to instance method "updateTimer()" exposed to Objective-C
-        Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateTimer), userInfo: nil, repeats: true)
         
     }
     
