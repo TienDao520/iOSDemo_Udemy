@@ -16,9 +16,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var progressBar: UIProgressView!
     
     let quiz = [
-        "Four + Two is equal to Six",
-        "Five - Three is greater than One",
-        "Three + Eight is less than Ten",
+        ["Four + Two is equal to Six", "True"],
+        ["Five - Three is greater than One", "True"],
+        ["Three + Eight is less than Ten", "False"]
     ]
     
     var questionNum = 0;
@@ -31,12 +31,27 @@ class ViewController: UIViewController {
     }
 
     @IBAction func answerBtnPressed(_ sender: UIButton) {
-        questionNum += 1
+        
+        let userAnswer = sender.currentTitle // True, False
+        let actualAnswer = quiz[questionNum][1]
+        
+        if userAnswer == actualAnswer {
+            print("Right")
+        } else {
+            print("Wrong")
+        }
+        
+        if questionNum + 1 < quiz.count {
+            questionNum += 1
+        } else {
+            questionNum = 0
+        }
         updateUI()
+        
     }
     
     func updateUI(){
-        questionLabel.text = quiz[questionNum]
+        questionLabel.text = quiz[questionNum][0]
     }
     
 }
