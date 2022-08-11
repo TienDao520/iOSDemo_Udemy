@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     ///Create new timer
     var timer = Timer()
 
+    @IBOutlet weak var titleLabel: UILabel!
     @IBAction func hardnessSelected(_ sender: UIButton) {
         
         ///Stop the previous timer
@@ -36,6 +37,9 @@ class ViewController: UIViewController {
         if secondRemaining>0 {
             print("\(secondRemaining) seconds.")
             secondRemaining-=1
+        } else {
+            timer.invalidate()
+            titleLabel.text = "Done"
         }
     }
 }
