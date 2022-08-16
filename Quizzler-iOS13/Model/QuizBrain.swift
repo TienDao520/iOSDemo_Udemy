@@ -1,20 +1,14 @@
 //
-//  ViewController.swift
+//  QuizBrain.swift
 //  Quizzler-iOS13
 //
-//  Created by Angela Yu on 12/07/2019.
-//  Copyright © 2019 The App Brewery. All rights reserved.
+//  Created by Tien Dao on 2022-08-11.
+//  Copyright © 2022 The App Brewery. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class ViewController: UIViewController {
-    
-    @IBOutlet weak var questionLabel: UILabel!
-    @IBOutlet weak var trueBtn: UIButton!
-    @IBOutlet weak var falseBtn: UIButton!
-    @IBOutlet weak var progressBar: UIProgressView!
-    
+struct QuizBrain {
     let quiz = [
         Question(q: "A slug's blood is green.", a: "True"),
         Question(q: "Approximately one quarter of human bones are in the feet.", a: "True"),
@@ -32,43 +26,34 @@ class ViewController: UIViewController {
     
     var questionNum = 0;
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        updateUI()
-        
-    }
-
-    @IBAction func answerBtnPressed(_ sender: UIButton) {
-        
-        let userAnswer = sender.currentTitle // True, False
-        let actualQuestion = quiz[questionNum]
-        let actualAnswer = actualQuestion.answer
-        
-        if userAnswer == actualAnswer {
-//            print("Right")
-            sender.backgroundColor = UIColor.green
+    ///"_" in this case is not need external parameter name
+    ///userAnswer is internal parameter name
+    func checkAnswer(_ userAnswer: String) -> Bool{
+        if userAnswer == quiz[questionNum].answer{
+            //user got it right
+            return true
         } else {
-//            print("Wrong")
-            sender.backgroundColor = UIColor.red
+            //user got it wrong
+            return false
         }
-        
+    }
+    func getQuestionText() -> String{
+        return quiz[questionNum].text
+    }
+    
+    func getProgress() -> Float {
+        let progress = Float(questionNum) / Float(quiz.count)
+        return progress
+    }
+    
+    ///And what this tells the computer is that when this function is run, it will replace the old value of
+    /// questionNumber with a new value.
+    /// So every time you create a struct, and inside one of the functions or one of its capabilities, you need
+    mutating func nextQuestion() {
         if questionNum + 1 < quiz.count {
             questionNum += 1
         } else {
             questionNum = 0
         }
-        
-         Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(updateUI), userInfo: nil, repeats: false)
-        
     }
-    
-    @objc func updateUI(){
-        questionLabel.text = quiz[questionNum].text
-        trueBtn.backgroundColor = UIColor.clear
-        falseBtn.backgroundColor = UIColor.clear
-        progressBar.progress = Float(questionNum + 1)/Float(quiz.count)
-    }
-    
 }
-
