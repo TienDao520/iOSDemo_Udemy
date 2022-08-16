@@ -9,3 +9,9 @@ import Foundation
 
 print("Hello, World!")
 
+let skeleton = Enemy()
+print(skeleton.health)
+
+skeleton.move()
+skeleton.attack()
+
