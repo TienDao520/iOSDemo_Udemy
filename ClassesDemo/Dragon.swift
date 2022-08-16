@@ -5,4 +5,8 @@ class Dragon: Enemy {
     func talk(speech: String) {
         print("Says: \(speech)")
     }
+    
+    override func move() {
+        print("Fly forwards")
+    }
 }
