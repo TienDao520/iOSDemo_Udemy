@@ -46,14 +46,14 @@ struct StoryBrain {
     var storyNum = 0;
     
     func getStoryTitle() -> String{
-        return stories[storyNum].storyTitle
+        return stories[storyNum].title
     }
     
     func getChoice1Text() -> String {
-        return stories[storyNum].storyChoice1
+        return stories[storyNum].choice1
     }
     func getChoice2Text() -> String {
-        return stories[storyNum].storyChoice2
+        return stories[storyNum].choice2
     }
 }
 
